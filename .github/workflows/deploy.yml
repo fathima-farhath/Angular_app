@@ -1,0 +1,16 @@
+name: Deploy angular application
+
+on:
+    workflow_run: 
+        workflows: ['Build angular application']
+        types:
+            - completed
+
+jobs:
+    Build:
+        environment: prod
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checking
+              run: echo "Everything works fine"
+              
