@@ -13,4 +13,6 @@ jobs:
         steps:
             - name: downloadig the artifacts
               uses: actions/download-artifact@v4
+              with:
+                name: drop
               
