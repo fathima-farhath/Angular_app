@@ -11,6 +11,6 @@ jobs:
         environment: prod
         runs-on: ubuntu-latest
         steps:
-            - name: Checking
-              run: echo "Everything works fine"
+            - name: downloadig the artifacts
+              uses: actions/download-artifact@v4
               
