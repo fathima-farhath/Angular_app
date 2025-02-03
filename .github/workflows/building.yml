@@ -1,0 +1,30 @@
+name: Building the application
+
+on:
+    push:
+    workflow_dispatch:
+
+jobs:
+    build_the_angular_app:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout the code
+              uses: actions/checkout@v4
+        
+            - name: setup node
+              uses: actions/setup-node@v4
+              with:
+                node-version: 20
+            
+            - name: Install dependencies
+              run: npm ci
+            
+            - name: Build the application
+              run: npm run build
+
+            - name: Publish artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: drop
+                path: dist/ 
+
