@@ -15,4 +15,7 @@ jobs:
               uses: actions/download-artifact@v4
               with:
                 name: drop
+                repository: ${{github.repository}}
+                run-id: 13114236398
+                github-token: ${{github.token}}
               
