@@ -7,11 +7,11 @@ on:
             - completed
 
 jobs:
-    Build:
+    Deployment:
         environment: prod
-        runs-on: ubuntu-latest
+        runs-on: self-hosted
         steps:
-            - name: downloadig the artifacts
+            - name: Downloadig the artifacts
               uses: actions/download-artifact@v4
               with:
                 name: drop
