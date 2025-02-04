@@ -26,3 +26,19 @@ jobs:
               with:
                 name: drop
                 path: dist/my_app
+
+    deploying_Application:
+        runs-on: self-hosted
+        needs: Building_application
+        steps:
+            - name: Downloading the artifacts
+              uses: actions/download-artifact@v4
+              with:
+                name: drop
+                path: my_artifacts
+            
+            - name: Deploying to nginx
+              run : |
+                sudo rm -rf /usr/share/nginx/html/*
+                sudo cp /home/ec2-user/actions-runner/_work/Angular_app/Angular_app/my_artifacts/browser/* /usr/share/nginx/html
+                sudo systemctl restart nginx
