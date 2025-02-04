@@ -29,6 +29,7 @@ jobs:
 
     deploying_Application:
         runs-on: self-hosted
+        environment: Production
         needs: Building_application
         steps:
             - name: Downloading the artifacts
