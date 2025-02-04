@@ -1,0 +1,28 @@
+name: Building and Deploying the app
+on: 
+    push:
+    workflow_dispatch:
+
+jobs:
+    Building_application:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checking out the code
+              uses: actions/checkout@v4
+
+            - name: Setup node js
+              uses: actions/setup-node@v4
+              with:
+                 node-version: 20
+            
+            - name: Setting up the dependencies
+              run: npm ci
+            
+            - name: Build the application
+              run: npm run build
+
+            - name: Publish artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: drop
+                path: dist/my_app
