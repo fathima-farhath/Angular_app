@@ -1,0 +1,25 @@
+name: Sample GitHub Actions
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checking out the code
+        run: echo "Checking out the code"
+
+      - name: Testing UT
+        run: echo "This step test the UT"
+
+      - name: Building teh application
+        run: echo "This step builds the application"
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: e2e Testing
+        run: echo "This step performs e2e testing"
+
+      - name: Deploying the application
+        run: echo "This step builds the application"
