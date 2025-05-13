@@ -3,29 +3,53 @@ on:
   workflow_dispatch:
   push:
 
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout@master
-        uses: actions/checkout@v4
+    Building_application:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checking out the code
+              uses: actions/checkout@v4
 
-      - name: Use node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+            - name: Setup node js
+              uses: actions/setup-node@v4
+              with:
+                 node-version: 20
+            
+            - name: Setting up the dependencies
+              run: npm ci
+            
+            - name: Build the application
+              run: npm run build
 
-      - name: Install dependencies
-        run: npm ci
+            - name: Publish artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: drop
+                path: dist/my_app
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: checkout@master
+#         uses: actions/checkout@v4
+
+#       - name: Use node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 20
+
+#       - name: Install dependencies
+#         run: npm ci
       
-      - name: Building the app
-        run: npm run build 
+#       - name: Building the app
+#         run: npm run build 
 
-      - name: Publish artifacts
-        uses: actions/upload-artifacts@v4
-        with:
-          name: drop
-          path: dist/my_app
+#       - name: Publish artifacts
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: drop
+#           path: dist/my_app
   
 
   
