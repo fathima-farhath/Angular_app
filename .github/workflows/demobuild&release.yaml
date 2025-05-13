@@ -29,6 +29,7 @@ jobs:
                 path: dist/my_app
     
     Deploy-nginx:
+        needs: Build-app
         runs-on: self-hosted
         steps: 
             - name: dowload the build artifacts
