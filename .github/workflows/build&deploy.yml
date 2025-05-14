@@ -36,11 +36,11 @@ jobs:
             - name: Download artifacts
               uses: actions/download-artifact@v4
               with:
-                name:  drop
+                name: drop
                 path: my_artifacts
 
             - name : Depoy to nginx
               run: |
                 sudo rm -rf /usr/share/nginx/html/*
-                sudo cp ${{ github.workflow }}/my_artifacts/browser/* /usr/share/nginx/html
+                sudo cp ${{ github.workspace }}/my_artifacts/browser/* /usr/share/nginx/html
                 sudo systemctl restart nginx
