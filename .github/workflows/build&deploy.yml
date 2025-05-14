@@ -41,7 +41,7 @@ jobs:
                 path: my_artifacts
 
             - name: Display variable value
-              run: echo "Displaying var:${{ env.var }}"
+              run: echo "Displaying var:${{ vars.var }}"
 
             - name : Depoy to nginx
               run: |
