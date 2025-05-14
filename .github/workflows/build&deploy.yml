@@ -30,6 +30,7 @@ jobs:
 
     deploy:
         needs: build
+        environment: prod
         runs-on: self-hosted
 
         steps:
@@ -38,6 +39,9 @@ jobs:
               with:
                 name: drop
                 path: my_artifacts
+
+            - name: Display variable value
+              run: echo ${{ env.var }}
 
             - name : Depoy to nginx
               run: |
