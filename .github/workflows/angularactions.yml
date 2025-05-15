@@ -27,3 +27,18 @@ jobs:
               with:
                 name: drop
                 path: dist/my_app
+    
+    deploy:
+        runs-on: self-hosted
+        steps:
+          - name: Download artifacts
+            uses: actions/download-artifact@v4
+            with:
+                name: drop
+                path: my_artifacts  
+            
+          - name: deployment
+            run: |
+              sudo rm -rf /usr/share/nginx/html/*
+              sudo cp ${{ github.workspace }}/my_artifacts/browser/* /usr/share/nginx/html
+              sudo systemctl restart nginx
