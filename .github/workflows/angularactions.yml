@@ -1,0 +1,29 @@
+name: Angular build and deploy
+
+on:
+    push:
+    workflow_dispatch:
+
+jobs:
+    Building_angular_app:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Fetching Code
+              uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                node-version: 20
+
+            - name: Installing the dependencies
+              run: npm ci
+
+            - name: Build 
+              run: npm run build
+              
+            - name: upload artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: drop
+                path: dist/my_app
