@@ -29,6 +29,7 @@ jobs:
                 path: dist/my_app
     
     deploy:
+        environment: pre-prod
         needs: Building_angular_app
         runs-on: self-hosted
         steps:
@@ -36,7 +37,10 @@ jobs:
             uses: actions/download-artifact@v4
             with:
                 name: drop
-                path: my_artifacts  
+                path: my_artifacts 
+
+          - name: Displaying variable
+            run: echo "Diplaying the variable:${{ vars.PREPODVAR }}"
             
           - name: deployment
             run: |
