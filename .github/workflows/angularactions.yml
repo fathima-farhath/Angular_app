@@ -29,6 +29,7 @@ jobs:
                 path: dist/my_app
     
     deploy:
+        needs: Building_angular_app
         runs-on: self-hosted
         steps:
           - name: Download artifacts
