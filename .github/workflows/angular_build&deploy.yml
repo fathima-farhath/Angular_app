@@ -1,45 +1,32 @@
-name: Building and Deploying the app
-on: 
+name: Angular Build and deploy
+
+on:
     push:
+        branches: 
+            - master
+            - 'feature/**'
     workflow_dispatch:
 
 jobs:
-    Building_application:
+    build:
         runs-on: ubuntu-latest
+
         steps:
-            - name: Checking out the code
+            - name: Fetching the code
               uses: actions/checkout@v4
-
-            - name: Setup node js
-              uses: actions/setup-node@v4
+            
+            - uses: actions/setup-node@v4
               with:
-                 node-version: 20
-            
-            - name: Setting up the dependencies
-              run: npm ci
-            
-            - name: Build the application
-              run: npm run build
+                 node-version: '20'
 
-            - name: Publish artifacts
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Building the application
+              run: npm run build
+            
+            - name: upload artifacts
               uses: actions/upload-artifact@v4
               with:
                 name: drop
                 path: dist/my_app
-
-    deploying_Application:
-        runs-on: self-hosted
-        environment: Production
-        needs: Building_application
-        steps:
-            - name: Downloading the artifacts
-              uses: actions/download-artifact@v4
-              with:
-                name: drop
-                path: my_artifacts
-            
-            - name: Deploying to nginx
-              run : |
-                sudo rm -rf /usr/share/nginx/html/*
-                sudo cp ${{ github.workspace }}/my_artifacts/browser/* /usr/share/nginx/html
-                sudo systemctl restart nginx
